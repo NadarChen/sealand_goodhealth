@@ -1,0 +1,24 @@
+<g-form bind:submit="handleSubmit" model="{{formData}}" primaryText="提交" rules="{{rules}}" validateType="{{validateType}}">
+    <view slot="content">
+        <g-wrapper title="医疗物资">
+            <view class="material-item" wx:for="{{formData.listItems}}" wx:key="{{index}}">
+                <view class="material-item__title-bar">
+                    <view class="title">物资{{index+1}}</view>
+                    <view bindtap="removeMaterial" class="remove" data-index="{{index}}">删除</view>
+                </view>
+                <g-picker required bind:change="handleFormChange" id="listItems[{{index}}].name" label="捐赠物品" placeholder="请选择捐赠物品" range="{{materialRange}}" value="{{formData.listItems[index].name}}"></g-picker>
+                <g-input required bind:change="handleFormChange" id="listItems[{{index}}].number" label="捐赠数量" placeholder="请输入捐赠数量" type="number" value="{{formData.listItems[index].number}}"></g-input>
+            </view>
+            <view bindtap="addMaterial" class="add-operation">
+                <image class="add-icon" src="{{addIconSrc}}"></image>
+                <text>新增物资</text>
+            </view>
+        </g-wrapper>
+        <g-wrapper title="捐赠人信息">
+            <g-input required bind:change="handleFormChange" id="company" label="捐赠单位" placeholder="请输入您的所属单位" value="{{formData.company}}"></g-input>
+            <g-input required bind:change="handleFormChange" id="user_name" label="联系人" placeholder="输入姓名" value="{{formData.user_name}}"></g-input>
+            <g-input required bind:change="handleFormChange" id="phone" label="联系电话" placeholder="输入手机号" type="mobile" value="{{formData.phone}}"></g-input>
+            <g-textarea bind:change="handleFormChange" id="desc" label="捐赠说明" placeholder="如有其他物资请详细说明" required="{{isNeedDesc}}" value="{{formData.desc}}"></g-textarea>
+        </g-wrapper>
+    </view>
+</g-form>

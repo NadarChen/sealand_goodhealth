@@ -1,0 +1,316 @@
+<view>
+    <view style="postion:relative">
+        <mp-navigation-bar back="{{false}}" background="{{isShowBg?'':'white'}}" color="{{isShowBg?'white':'black'}}" title="微应急标准版"></mp-navigation-bar>
+    </view>
+    <view class="back-view {{isShowBg?'show':''}}">
+        <image alt="" class="back-image" src="https://imgcache.gzonline.gov.cn/cos/banner_72187081.png"></image>
+    </view>
+    <view bind:tap="navigateToWebview" class=" data-overview-box" data-url="https://news.qq.com/zt2020/page/feiyan.htm?from=groupmessage" style="margin-top:{{statusBarHeight===44?202:250}}rpx">
+        <view class="flex-container justify-item" style="margin:0 32rpx;align-items:center;">
+            <view class="header">全国疫情状况</view>
+            <view class="header-desc">截至 {{epidemicData.lastUpdateTime}}</view>
+        </view>
+        <view class="data-detail">
+            <view class="data-item flex-item">
+                <view class="confirm">{{epidemicData.confirm}}</view>
+                <view class="desc">确诊病例</view>
+            </view>
+            <view class="divider"></view>
+            <view class="data-item flex-item">
+                <view class="suspect">{{epidemicData.suspect}}</view>
+                <view class="desc">疑似病例</view>
+            </view>
+            <view class="divider"></view>
+            <view class="data-item flex-item">
+                <view class="heal">{{epidemicData.heal}}</view>
+                <view class="desc">治愈人数</view>
+            </view>
+            <view class="divider"></view>
+            <view class="data-item flex-item">
+                <view class="dead">{{epidemicData.dead}}</view>
+                <view class="desc">死亡病例</view>
+            </view>
+        </view>
+        <view class="flex-container justify-item link-block">
+            <view style="color:#999;">数据来自国家卫健委</view>
+            <view style="color:#5F6068;display:flex;align-items:center">
+                <text>查看更多</text>
+                <image alt="" class="arrow-img" src="https://imgcache.gzonline.gov.cn/cos//icon_arrow@2x_c677e09e.png"></image>
+            </view>
+        </view>
+    </view>
+    <view bind:tap="onTapAccess" class="access-box health-code" data-real="{{true}}" data-url="/packages/health-code/pages/report-health/index">
+        <image class="health-code__imageBg" src="../../images/home/card_bg@2x.png"></image>
+        <view class="health-code__image">
+            <image src="../../images/home/card_head@2x.png"></image>
+        </view>
+        <view class="health-code__content">
+            <view class="title">防疫健康码</view>
+            <view class="desc">社区互信共享，提高出行效率</view>
+        </view>
+    </view>
+    <view class="card-pop">
+        <view bind:tap="openCard" class="card-right card-contend" data-real="{{true}}" wx:if="{{isCard}}">
+            <view class="card-contend">
+                <image class="card-background" src="../../images/home/icon-dz-blue.png"></image>
+                <view class="card-img">
+                    <image class="card-background" src="../../images/home/icon-dzjkk.png"></image>
+                </view>
+                <view class="card-text">
+                    <view class="card-title">电子健康卡</view>
+                    <view class="card-title2">办卡去挂号</view>
+                    <view class="card-title2">
+							快速找医生
+						</view>
+                </view>
+            </view>
+        </view>
+        <view class="card-left card-contend" data-real="{{true}}" wx:if="{{isSecurityCard}}">
+            <navigator appId="wxb032bc789053daf4" bindfail="toMiniProgramFail" bindsuccess="toMiniProgramSuccess" class="card-contend" path="pages/webview/main?src=https%3A%2F%2Fsdi.wecity.qq.com%2Fm%2F20191012160351%2Fshouye%3F%26channel%3DAAFU5p52nXc4eTgxM7UNflhX" target="miniProgram">
+                <image class="card-background" src="../../images/home/icon-dz-orange.png"></image>
+                <view class="card-img">
+                    <image class="card-background" src="../../images/home/icon-dzsbk.png"></image>
+                </view>
+                <view class="card-text">
+                    <view class="card-title">电子社保卡</view>
+                    <view class="card-title2">绑卡领健康金</view>
+                    <view class="card-title2">
+							最高￥<text class="card-num">999</text>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <view class="card-left card-contend" data-real="{{true}}" wx:if="{{isMedicareCard}}">
+            <navigator appId="wxb032bc789053daf4" bindfail="toMiniProgramFail" bindsuccess="toMiniProgramSuccess" class="card-contend" path="pages/webview/main?src=https%3A%2F%2Fsdi.wecity.qq.com%2Fm%2F20191114212247%2Factivity%3Fchannel%3DAAHAyLEKNrLznJoKKipKLmdy" target="miniProgram">
+                <image class="card-background" src="../../images/home/icon-dz-orange.png"></image>
+                <view class="card-img">
+                    <image class="card-background" src="../../images/home/icon-dzsbk.png"></image>
+                </view>
+                <view class="card-text">
+                    <view class="card-title">医保电子凭证</view>
+                    <view class="card-title2">激活领健康金</view>
+                    <view class="card-title2">
+							最高￥<text class="card-num">999</text>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <view class="card-left card-contend" wx:if="{{isMore}}">
+            <image class="card-background" src="../../images/home/icon-dz-blue.png"></image>
+            <view class="card-img">
+                <image class="card-background" src="../../images/home/icon-jqqd.png"></image>
+            </view>
+            <view class="card-text">
+                <view class="card-title">敬请期待</view>
+                <view class="card-title2">更多服务正在建</view>
+                <view class="card-title2">
+						设中<text class="card-num"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <g-poplayer bind:close="closePoplayer" visible="{{visibleSq}}">
+        <view class="u-gm__pop">
+            <view class="u-gm__title">实名信息授权</view>
+            <view class="u-gm__content">是否同意授权《电子健康卡》获取你的实名信息？授权后，可直接去挂号，快速找医生。</view>
+            <view>
+                <view class="u-gm-btn u-gm-left">
+                    <button bind:tap="closeCancel">取消</button>
+                </view>
+                <view class="u-gm-btn u-gm-right">
+                    <button bind:tap="okCardFlag" type="primary">同意授权</button>
+                </view>
+            </view>
+        </view>
+    </g-poplayer>
+    <view>
+        <view class="title-block">国办专区</view>
+        <view class=" guobanlist">
+            <view bindtap="handleGuoBan" class="guobanlist_item {{index%2==0?'guobanlist_item_mr':''}}" data-item="{{item}}" wx:for="{{guobanlist}}" wx:key="{{index}}">
+                <view class="guoban-item__header" style="background: {{item.bgColor}}"></view>
+                <image class="new" mode="widthFix" src="../../images/guoban/icon-hot@2x.png" style=" height: 30rpx;width: 66rpx;" wx:if="{{item.isNew&&isNew&&!isAction}}"></image>
+                <image src="{{item.src}}"></image>
+                <view class="title">{{item.title}}</view>
+                <view class="desc"> {{item.tips}}</view>
+            </view>
+        </view>
+        <view class="title-block">便民服务</view>
+        <view class="service-block">
+            <view class="service-row">
+                <view class="service-col" style="padding-right:16rpx;">
+                    <view bind:tap="onTapAccess" class="service-content kouzhao service-col-bg" data-url="/pages/buy/notice/index">
+                        <view class="title">
+                            <view>口罩预约</view>
+                            <view class="title-bg"></view>
+                        </view>
+                        <view class="desc">线上预约 <text class="text--warn">邮寄到家</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="service-col" style="padding-right:16rpx;">
+                    <view bind:tap="navigateToWebview" class="service-content yizhen service-col-bg" data-url="https://cmda.qq.com/pages/clinic.html?sfr=sheninin">
+                        <view class="title">
+                            <view>联合义诊</view>
+                            <view class="title-bg"></view>
+                        </view>
+                        <view class="desc">腾讯联合五大平台提供在线义诊</view>
+                    </view>
+                </view>
+            </view>
+            <view class="service-row">
+                <view class="service-col" style="padding-right:16rpx;">
+                    <view bind:tap="onTapAccess" class="service-content jtkkdj service-col-bg" data-url="/packages/car-code/pages/code-manage/index">
+                        <view class="title">
+                            <view>交通卡口登记</view>
+                            <view class="title-bg"></view>
+                        </view>
+                        <view class="desc">交通卡口检疫站登记</view>
+                    </view>
+                </view>
+                <view class="service-col" style="padding-right:16rpx;">
+                    <view bind:tap="navigateToWebview" class="service-content wenda service-col-bg" data-url="https://feiyan.wecity.qq.com/wuhan/dist/index.html?from=singlemessage&isappinstalled=0#/aiqna?_scope=snsapi_base&channel=AAAFz65Pi949uXu5r3m1pQHF3">
+                        <view class="title">
+                            <view>疫情智能问答</view>
+                            <view class="title-bg"></view>
+                        </view>
+                        <view class="desc">腾讯AI提供服务</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="title-block">企业专区</view>
+        <view class="service-block">
+            <view class="service-row">
+                <view class="service-col" style="padding-right:16rpx;">
+                    <view bind:tap="navigateToWebview" class="service-content qyfgba service-col-bg" data-url="https://qyfg.tgovcloud.com/qysp/vp/module/form.html?agentCode=form&corp_id=wwf9995c4c4f6e0a0e#/open/add?id=form19b9532200bc49acb6c593bb74517d3b&h5Page=true&openId={{openid}}">
+                        <view class="title">
+                            <view>企业复工备案</view>
+                            <view class="title-bg"></view>
+                        </view>
+                        <view class="desc">复工复产备案，享受精准指导和服务</view>
+                    </view>
+                </view>
+                <view class="service-col" style="padding-right:16rpx;">
+                    <view bind:tap="navigateToWebview" class="service-content qysqxy service-col-bg" data-url="https://qyfg.tgovcloud.com/qysp/vp/module/form.html?agentCode=form&corp_id=wwf9995c4c4f6e0a0e#/open/add?id=form09bd3eef17a4471d9ce8294f41fd7315&h5Page=true&openId={{openid}}">
+                        <view class="title">
+                            <view>企业诉求响应</view>
+                            <view class="title-bg"></view>
+                        </view>
+                        <view class="desc">帮助企业解决复工复产相关诉求和问题</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="title-block">疫情上报</view>
+        <view bind:tap="onTapAccess" class="access-box" data-url="/pages/report/home/index">
+            <view class="img">
+                <image src="https://imgcache.gzonline.gov.cn/cos//home-zizhushenbao_01fa9ae3.png"></image>
+            </view>
+            <view class="right-content">
+                <view class="title">自主申报</view>
+                <view class="desc">自主申报，享受精准指导和服务。众志成城、共抗疫情</view>
+            </view>
+        </view>
+        <view bind:tap="onTapAccess" class="access-box" data-url="/pages/report/inform/index">
+            <view class="img">
+                <image src="https://imgcache.gzonline.gov.cn/cos//home-yiqing-xiansuo_faff7677.png"></image>
+            </view>
+            <view class="right-content">
+                <view class="title">疫情线索上报</view>
+                <view class="desc">如发现身边与新冠状病毒疫情相关线索，请如实上报详情事件情况</view>
+            </view>
+        </view>
+        <navigator appId="wxcf1f51ec21883acf" bindfail="toMiniProgramFail" bindsuccess="toMiniProgramSuccess" path="pages/report/report_list?key=6" target="miniProgram">
+            <view class="access-box">
+                <view class="img">
+                    <image src="https://imgcache.gzonline.gov.cn/cos//home-yiqing-jubao_f80b9c2f.png"></image>
+                </view>
+                <view class="right-content">
+                    <view class="title">疫情相关举报</view>
+                    <view class="desc">如发现利用疫情进行募捐诈骗，传谣/造谣、制造恶意言论等不良行为，请进行举报</view>
+                </view>
+            </view>
+        </navigator>
+        <view class="title-block">发热门诊</view>
+        <view class="fever-block">
+            <view class="fever-item-wrapper" style="padding-right:16rpx;">
+                <navigator appId="wxb032bc789053daf4" bindfail="toMiniProgramFail" bindsuccess="toMiniProgramSuccess" path="pages/index/home/main?chanel=AAAFz65Pi949uXu5r3m1pQHF3&navigate_uri=%2Fpages%2Fwebview%2Fmain%3Fsrc%3Dhttps%253A%252F%252Ffeiyan.wecity.qq.com%252Fwuhan%252Fdist%252Findex.html%2523%252Fselftest%253Ffrom%253Dlung%2526channel%253DAAAFz65Pi949uXu5r3m1pQHF3%2526_scope%253Dsnsapi_base" target="miniProgram">
+                    <view class="item-header" style="background:#F0F2FD"></view>
+                    <view class="fever-item">
+                        <view class="img">
+                            <image src="https://imgcache.gzonline.gov.cn/cos//icon_fever_inspection@2x_3f2b7bc6.png"></image>
+                        </view>
+                        <view class="desc">发热自查</view>
+                    </view>
+                </navigator>
+            </view>
+            <view class="fever-item-wrapper" style="padding:0 16rpx;">
+                <navigator appId="wxb032bc789053daf4" bindfail="toMiniProgramFail" bindsuccess="toMiniProgramSuccess" path="pages/index/home/main?channel=AAFz65Pi949uXu5r3m1pQHF3&navigate_uri=%2Fpages%2Fwebview%2Fmain%3Fsrc%3Dhttps%253A%252F%252Fsdi.wecity.qq.com%252Fm%252F2020012115185202%252Fmap-landing%253F_scope%253Dsnsapi_base%2526channel%253DAAAFz65Pi949uXu5r3m1pQHF3" target="miniProgram">
+                    <view class="item-header" style="background:#FFF5F4"></view>
+                    <view class="fever-item">
+                        <view class="img">
+                            <image src="https://imgcache.gzonline.gov.cn/cos//icon_fever_nav@2x_9105f0f3.png"></image>
+                        </view>
+                        <view class="desc">发热门诊导航</view>
+                    </view>
+                </navigator>
+            </view>
+            <view bind:tap="navigateToWebview" class="fever-item-wrapper" data-url="https://h5-health.tengmed.com/h5/feiyan/wenzhen/list?cityCode=440300&channel=szswjw" style="padding-left:16rpx;">
+                <view class="item-header" style="background:#EFF9F7"></view>
+                <view class="fever-item">
+                    <view class="img">
+                        <image src="https://imgcache.gzonline.gov.cn/cos//icon_fever_online@2x_b86354f5.png"></image>
+                    </view>
+                    <view class="desc">线上发热门诊</view>
+                </view>
+            </view>
+        </view>
+        <view class="title-block">抗疫联盟</view>
+        <view class="league-block">
+            <view class="league-gird">
+                <view class="league-gird-item" wx:for="{{leagueList}}" wx:key="index">
+                    <view bind:tap="onTapAccess" class="league-content" data-id="{{item.id}}" data-url="/pages/league/detail/index">
+                        <view class="img">
+                            <image src="{{item.iconUrl}}"></image>
+                        </view>
+                        <view class="title">
+                            <text>{{item.label}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view bind:tap="onTapAccess" class="league-gird-item" data-url="/pages/league/list/index">
+                    <view class="league-content">
+                        <view class="img">
+                            <image src="../../images/anti-epidemic-alliance/icon-more.png"></image>
+                        </view>
+                        <view class="title">
+                            <text>查看更多</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="title-block">防疫资讯</view>
+        <navigator appId="wxb032bc789053daf4" bindfail="toMiniProgramFail" bindsuccess="toMiniProgramSuccess" path="pages/index/home/main?channel=AAFz65Pi949uXu5r3m1pQHF3&navigate_uri=%2Fpages%2Fwebview%2Fmain%3Fsrc%3Dhttps%253A%252F%252Ffeiyan.wecity.qq.com%252Fwuhan%252Fdist%252Findex.html%2523%252Findex%253F_scope%253Dsnsapi_base%2526channel%253DAAFz65Pi949uXu5r3m1pQHF3%250A" target="miniProgram">
+            <view class="access-box">
+                <view class="img">
+                    <image src="https://imgcache.gzonline.gov.cn/cos//icon_news1@2x_b51484fe.png"></image>
+                </view>
+                <view class="right-content">
+                    <view class="title">疫情播报</view>
+                    <view class="desc">实时跟踪最新疫情动态，一手掌握最全面的权威疫情资讯</view>
+                </view>
+            </view>
+        </navigator>
+        <view bind:tap="navigateToWebview" class="access-box" data-url="https://h5.baike.qq.com/mobile/search.html?stag=&scope=site&search=%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8A%B6%E7%97%85%E6%AF%92%E8%82%BA%E7%82%8E&adtag=op.co.sheni.search">
+            <view class="img">
+                <image src="https://imgcache.gzonline.gov.cn/cos//icon_news3@2x_8cb36285.png"></image>
+            </view>
+            <view class="right-content">
+                <view class="title">肺炎科普</view>
+                <view class="desc">科普“新型冠状病毒感染肺炎”相关知识，共同战“疫”</view>
+            </view>
+        </view>
+    </view>
+</view>
+<g-footer></g-footer>

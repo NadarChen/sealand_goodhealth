@@ -1,0 +1,14 @@
+.container {
+    padding: 40rpx;
+}
+
+page {
+}
+
+.text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@import "__wuBaseWxss__/3.wxss";

@@ -1,0 +1,43 @@
+<view class="title">三种捐赠渠道</view>
+<view class="content">
+    <g-wrapper>
+        <g-cell>
+            <view class="channel-title">
+                <text class="channel-title__num">1</text>
+                <text class="channel-title__txt">邮局汇款</text>
+            </view>
+            <view class="channel-desc">
+                <view class="channel-desc__item">接收人：汕尾市红十字会 </view>
+                <view class="channel-desc__item">地址：汕尾市武江区芙蓉北路22号</view>
+                <view class="channel-desc__item">邮编：512026 </view>
+            </view>
+        </g-cell>
+        <g-cell>
+            <view class="channel-title">
+                <text class="channel-title__num">2</text>
+                <text class="channel-title__txt">银行汇款 </text>
+            </view>
+            <view class="channel-desc">
+                <view class="channel-desc__item">账户名称：汕尾市红十字会  </view>
+                <view class="channel-desc__item">开户银行：中国工商银行汕尾市向阳支行</view>
+                <view class="channel-desc__item">账号：<text bindtap="textPaste" class="blue-text">2005 2022 0902 4902 302</text>
+                </view>
+            </view>
+        </g-cell>
+        <g-cell>
+            <view class="channel-title">
+                <text class="channel-title__num">3</text>
+                <text class="channel-title__txt">联系捐赠</text>
+            </view>
+            <view class="channel-desc">
+                <view class="channel-desc__item">联系人：汕尾市红十字会黄诗荣</view>
+                <view class="channel-desc__item">电话号码：<text bindtap="Tel" class="blue-text" data-reply-phone="0751-8176603">0751-8176603</text>
+                </view>
+                <view class="channel-desc__item">手机号码：<text bindtap="Tel" class="blue-text" data-reply-phone="13450337928">13450337928</text>
+                </view>
+            </view>
+        </g-cell>
+    </g-wrapper>
+    <view style="height:80px"></view>
+</view>
+<g-button-group fixed bind:primaryTap="handlePrimaryTap" primaryText="我要登记"></g-button-group>
